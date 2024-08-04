@@ -1,0 +1,3 @@
+update(dinos, "T-Rex", "The largest known carnivorous dinosaur")
+get(dinos, "T-Rex")
+get(dinos, "Triceratops")
