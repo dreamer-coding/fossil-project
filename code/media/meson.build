@@ -7,8 +7,6 @@ data = [
     'update_and_get.crabql'
 ]
 
-foreach iter : data
-    fs.copyfile(iter, '.')
-endforeach
+fs.copyfile(data, '.')
 
 install_data(data)
