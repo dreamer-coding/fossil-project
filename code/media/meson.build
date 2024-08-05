@@ -1,12 +1,14 @@
 fs = import('fs')
 data = [
-    'complex_operations.crabql',
-    'create_and_insert.crabql',
-    'delete_query.crabql',
-    'namespace_operations.crabql',
-    'update_and_get.crabql'
+    'input1.txt',
+    'input2.txt',
+    'input3.txt',
+    'input4.txt',
+    'input5.txt'
 ]
 
-fs.copyfile(data, '.')
+foreach iter : data
+    fs.copyfile(iter, iter)
+endforeach
 
 install_data(data)
