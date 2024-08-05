@@ -16,8 +16,19 @@
 
 #include "common.h"
 
-#include "fossil/crabdb/framework.h"
+/**
+ * Generate a FizzBuzz output for a given integer.
+ *
+ * @param n      The integer to process.
+ * @param output The output buffer to write the result to.
+ */
+void fizzbuzz(int n, char *output);
 
-fossil_crabdb_error_t execute_crabql_file(fossil_crabdb_t *db, const char *filepath);
+/**
+ * Process a file containing integers and print the FizzBuzz output for each one.
+ *
+ * @param filename The name of the file to process.
+ */
+void process_file(const char *filename);
 
 #endif // FOSSIL_APP_H

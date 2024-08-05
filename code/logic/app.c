@@ -14,59 +14,44 @@
 #include "fossil/app.h"
 
 /**
- * @brief Execute a .crabql file.
- * 
- * @param db Pointer to the fossil_crabdb_t database.
- * @param filepath Path to the .crabql file.
- * @return Error code indicating the result of the operation.
+ * Generate a FizzBuzz output for a given integer.
+ *
+ * @param n      The integer to process.
+ * @param output The output buffer to write the result to.
  */
-fossil_crabdb_error_t execute_crabql_file(fossil_crabdb_t *db, const char *filepath) {
-    if (!db || !filepath) return CRABDB_ERR_INVALID_QUERY;
+void fizzbuzz(int n, char *output) {
+    if (n % 3 == 0 && n % 5 == 0) {
+        sprintf(output, "FizzBuzz");
+    } else if (n % 3 == 0) {
+        sprintf(output, "Fizz");
+    } else if (n % 5 == 0) {
+        sprintf(output, "Buzz");
+    } else {
+        sprintf(output, "%d", n);
+    }
+} // end of fun
 
-    FILE *file = fopen(filepath, "r");
-    if (!file) return CRABDB_ERR_INVALID_QUERY;
+/**
+ * Process a file containing integers and print the FizzBuzz output for each one.
+ *
+ * @param filename The name of the file to process.
+ */
+void process_file(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        perror("Error opening file");
+        return;
+    }
 
-    char line[256];
-    while (fgets(line, sizeof(line), file)) {
-        // Remove newline character
-        line[strcspn(line, "\n")] = '\0';
-
-        // Find the command and arguments
-        char *command = strtok(line, "(");
-        if (!command) continue;
-
-        char *args = strtok(NULL, ")");
-        if (!args) continue;
-
-        // Trim spaces from the command
-        while (isspace((unsigned char)*command)) command++;
-        char *end = command + strlen(command) - 1;
-        while (end > command && isspace((unsigned char)*end)) end--;
-        end[1] = '\0';
-
-        // Tokenize the arguments
-        char *token;
-        char *tokens[10]; // Assuming a max of 10 arguments
-        int token_count = 0;
-        token = strtok(args, ",");
-        while (token) {
-            while (isspace((unsigned char)*token)) token++;
-            char *end = token + strlen(token) - 1;
-            while (end > token && isspace((unsigned char)*end)) end--;
-            end[1] = '\0';
-            tokens[token_count++] = token;
-            token = strtok(NULL, ",");
-        }
-
-        fossil_crabdb_error_t result = parse_and_execute(db, command, tokens, token_count);
-        if (result != CRABDB_OK) {
-            printf("Error executing command '%s': %d\n", command, result);
-        }
+    int n;
+    while (fscanf(file, "%d", &n) != EOF) {
+        char output[10];
+        fizzbuzz(n, output);
+        printf("%s\n", output);
     }
 
     fclose(file);
-    return CRABDB_OK;
-}
+} // end of fun
 
 /**
  * Entry point for the FossilApp.
@@ -79,20 +64,12 @@ fossil_crabdb_error_t execute_crabql_file(fossil_crabdb_t *db, const char *filep
  * @return     The result of the app code execution.
  */
 int fossil_app_main(int argc, char **argv) {
-    fossil_crabdb_t db = {0}; // Initialize the database
-
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s <crabql-file>\n", argv[0]);
-        return 1;
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <input file>\n", argv[0]);
+        return EXIT_FAILURE;
     }
 
-    if (execute_crabql_file(&db, argv[1]) != CRABDB_OK) {
-        fprintf(stderr, "Failed to execute .crabql file\n");
-        return 1;
-    }
+    process_file(argv[1]);
 
-    // Clean up
-    fossil_crabdb_erase(&db);
-
-    return 0;
-} // end of func
+    return EXIT_SUCCESS;
+} // end of fun
