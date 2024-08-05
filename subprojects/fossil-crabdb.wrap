@@ -1,9 +1,0 @@
-# ======================
-# Git Wrap package definition
-# ======================
-[wrap-git]
-url = https://github.com/fossillogic/fossil-crabdb.git
-revision = v0.1.0
-
-[provide]
-fossil-crabdb = fossil_crabdb_dep

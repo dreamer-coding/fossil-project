@@ -1,5 +1,5 @@
 code_deps = [
-    dependency('fossil-crabdb')
+    # add dependencies here
 ]
 
 subdir('media')
