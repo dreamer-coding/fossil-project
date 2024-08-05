@@ -23,16 +23,7 @@
 // mock objects are set here.
 // * * * * * * * * * * * * * * * * * * * * * * * *
 
-FOSSIL_FIXTURE(project_fixture);
-fossil_crabdb_t *db;
-
-FOSSIL_SETUP(project_fixture) {
-    db = fossil_crabdb_create(); // Initialize your database
-}
-
-FOSSIL_TEARDOWN(project_fixture) {
-    fossil_crabdb_erase(db); // Clean up database after each test
-}
+// Placeholder for test setup
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test Cases
@@ -42,98 +33,36 @@ FOSSIL_TEARDOWN(project_fixture) {
 // as samples for library usage.
 // * * * * * * * * * * * * * * * * * * * * * * * *
 
-FOSSIL_TEST(test_create_and_insert_crabql) {
-    // Load and execute the .crabql file
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, execute_crabql_file("create_and_insert.crabql", db));
-
-    // Verify inserted data
-    char *value = NULL;
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, fossil_crabdb_get(db, "dinos", "T-Rex", &value));
-    ASSUME_NOT_CNULL(value);
-    ASSUME_ITS_EQUAL_CSTR("A large carnivorous dinosaur", value);
-    fossil_crabdb_free(value);
-
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, fossil_crabdb_get(db, "dinos", "Triceratops", &value));
-    ASSUME_NOT_CNULL(value);
-    ASSUME_ITS_EQUAL_CSTR("A herbivorous dinosaur with three horns", value);
-    fossil_crabdb_free(value);
-
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, fossil_crabdb_get(db, "dinos", "Velociraptor", &value));
-    ASSUME_NOT_CNULL(value);
-    ASSUME_ITS_EQUAL_CSTR("A small, fast, and agile dinosaur", value);
-    fossil_crabdb_free(value);
+FOSSIL_TEST(test_fizzbuzz_1) {
+    char output[10];
+    fizzbuzz(1, output);
+    ASSUME_ITS_EQUAL_CSTR("1", output);
 }
 
-FOSSIL_TEST(test_update_and_get_crabql) {
-    // Set up initial state
-    fossil_crabdb_insert(db, "dinos", "T-Rex", "A large carnivorous dinosaur");
-
-    // Load and execute the .crabql file
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, execute_crabql_file("update_and_get.crabql", db));
-
-    // Verify updates
-    char *value = NULL;
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, fossil_crabdb_get(db, "dinos", "T-Rex", &value));
-    ASSUME_NOT_CNULL(value);
-    ASSUME_ITS_EQUAL_CSTR("The largest known carnivorous dinosaur", value);
-    fossil_crabdb_free(value);
-
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, fossil_crabdb_get(db, "dinos", "Triceratops", &value));
-    ASSUME_NOT_CNULL(value);
-    ASSUME_ITS_EQUAL_CSTR("A herbivorous dinosaur with three horns", value);
-    fossil_crabdb_free(value);
+FOSSIL_TEST(test_fizzbuzz_3) {
+    char output[10];
+    fizzbuzz(3, output);
+    ASSUME_ITS_EQUAL_CSTR("Fizz", output);
 }
 
-FOSSIL_TEST(test_delete_and_query_crabql) {
-    // Set up initial state
-    fossil_crabdb_insert(db, "dinos", "Velociraptor", "A small, fast, and agile dinosaur");
-
-    // Load and execute the .crabql file
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, execute_crabql_file("delete_and_query.crabql", db));
-
-    // Verify deletions and queries
-    char *value = NULL;
-    ASSUME_ITS_EQUAL_I32(CRABDB_ERR_KEY_NOT_FOUND, fossil_crabdb_get(db, "dinos", "Velociraptor", &value));
-    ASSUME_ITS_CNULL(value);
-
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, fossil_crabdb_get(db, "dinos", "T-Rex", &value));
-    ASSUME_NOT_CNULL(value);
-    ASSUME_ITS_EQUAL_CSTR("A large carnivorous dinosaur", value);
-    fossil_crabdb_free(value);
+FOSSIL_TEST(test_fizzbuzz_5) {
+    char output[10];
+    fizzbuzz(5, output);
+    ASSUME_ITS_EQUAL_CSTR("Buzz", output);
 }
 
-FOSSIL_TEST(test_namespace_operations_crabql) {
-    // Load and execute the .crabql file
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, execute_crabql_file("namespace_operations.crabql", db));
-
-    // Verify namespace creation and deletion
-    char *value = NULL;
-    ASSUME_ITS_EQUAL_I32(CRABDB_ERR_NS_NOT_FOUND, fossil_crabdb_get(db, "prehistoric", "dinosaurs", &value));
-    ASSUME_ITS_CNULL(value);
-}
-
-FOSSIL_TEST(test_complex_operations_crabql) {
-    // Load and execute the .crabql file
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, execute_crabql_file("complex_operations.crabql", db));
-
-    // Verify operations in the mesozoic namespace
-    char *value = NULL;
-    ASSUME_ITS_EQUAL_I32(CRABDB_OK, fossil_crabdb_get(db, "mesozoic", "Jurassic", &value));
-    ASSUME_NOT_CNULL(value);
-    ASSUME_ITS_EQUAL_CSTR("A dinosaur known for its distinctive plates along its back", value);
-    fossil_crabdb_free(value);
-
-    ASSUME_ITS_EQUAL_I32(CRABDB_ERR_KEY_NOT_FOUND, fossil_crabdb_get(db, "mesozoic", "Cretaceous", &value));
-    ASSUME_ITS_CNULL(value);
+FOSSIL_TEST(test_fizzbuzz_15) {
+    char output[10];
+    fizzbuzz(15, output);
+    ASSUME_ITS_EQUAL_CSTR("FizzBuzz", output);
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test Pool
 // * * * * * * * * * * * * * * * * * * * * * * * *
 FOSSIL_TEST_GROUP(c_some_tests) {    
-    ADD_TESTF(test_create_and_insert_crabql, project_fixture);
-    ADD_TESTF(test_update_and_get_crabql, project_fixture);
-    ADD_TESTF(test_delete_and_query_crabql, project_fixture);
-    ADD_TESTF(test_namespace_operations_crabql, project_fixture);
-    ADD_TESTF(test_complex_operations_crabql, project_fixture);
+    ADD_TEST(test_fizzbuzz_1);
+    ADD_TEST(test_fizzbuzz_3);
+    ADD_TEST(test_fizzbuzz_5);
+    ADD_TEST(test_fizzbuzz_15);
 } // end of tests

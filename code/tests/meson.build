@@ -1,7 +1,7 @@
 if get_option('with_test').enabled()
     run_command(['python3', 'tools' / 'generate-runner.py'], check: true)
 
-    test_src = ['unit_runner.cpp']
+    test_src = ['unit_runner.c']
     test_cubes = ['unittest']
 
     foreach cube : test_cubes
