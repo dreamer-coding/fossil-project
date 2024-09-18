@@ -14,6 +14,7 @@
 #ifndef FOSSIL_APP_H
 #define FOSSIL_APP_H
 
+
 #include "common.h"
 
 /**
