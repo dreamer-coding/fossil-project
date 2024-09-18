@@ -1,4 +1,0 @@
-create_namespace(dinos)
-insert(dinos, "T-Rex", "A large carnivorous dinosaur")
-insert(dinos, "Triceratops", "A herbivorous dinosaur with three horns")
-insert(dinos, "Velociraptor", "A small, fast, and agile dinosaur")
