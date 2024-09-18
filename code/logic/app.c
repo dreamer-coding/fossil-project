@@ -47,7 +47,7 @@ void process_file(const char *filename) {
     while (fscanf(file, "%d", &n) != EOF) {
         char output[10];
         fizzbuzz(n, output);
-        printf("%s\n", output);
+        fossil_io_printf("%s\n", output);
     }
 
     fclose(file);
@@ -65,7 +65,7 @@ void process_file(const char *filename) {
  */
 int fossil_app_main(int argc, char **argv) {
     if (argc != 2) {
-        fprintf(stderr, "Usage: %s <input file>\n", argv[0]);
+        fossil_io_error("Usage: %s <input file>\n", argv[0]);
         return EXIT_FAILURE;
     }
 
