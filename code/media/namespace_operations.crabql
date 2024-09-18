@@ -1,5 +1,0 @@
-create_namespace(prehistoric)
-create_sub_namespace(prehistoric, "dinosaurs")
-insert(prehistoric, "dinosaurs", "Pteranodon", "A large pterosaur with a wingspan of over 7 meters")
-get(prehistoric, "dinosaurs", "Pteranodon")
-erase_namespace(prehistoric)
