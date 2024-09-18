@@ -17,4 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <fossil/io/framework.h>
+#include <fossil/lib/framework.h>
+
 #endif // FOSSIL_APP_H
