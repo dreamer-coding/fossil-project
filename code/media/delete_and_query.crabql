@@ -1,3 +1,0 @@
-delete(dinos, "Velociraptor")
-get(dinos, "Velociraptor")
-get(dinos, "T-Rex")
