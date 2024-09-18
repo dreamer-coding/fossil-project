@@ -1,5 +1,6 @@
 code_deps = [
-    # add dependencies here
+    dependency('fossil-io'),
+    dependency('fossil-lib')
 ]
 
 subdir('media')
