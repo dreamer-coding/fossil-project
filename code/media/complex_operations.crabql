@@ -1,7 +1,0 @@
-create_namespace(mesozoic)
-insert(mesozoic, "Jurassic", "Stegosaurus", "A dinosaur known for its plates along its back")
-insert(mesozoic, "Cretaceous", "Brachiosaurus", "A long-necked dinosaur")
-update(mesozoic, "Jurassic", "Stegosaurus", "A dinosaur known for its distinctive plates along its back")
-get(mesozoic, "Jurassic", "Stegosaurus")
-delete(mesozoic, "Cretaceous", "Brachiosaurus")
-get(mesozoic, "Cretaceous", "Brachiosaurus")
