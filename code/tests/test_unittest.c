@@ -11,8 +11,7 @@
  * Copyright (C) 2024 Fossil Logic. All rights reserved.
  * -----------------------------------------------------------------------------
  */
-#include <fossil/unittest/framework.h>
-#include <fossil/unittest/assume.h>
+#include <fossil/test/framework.h>
 
 #include "fossil/app.h"
 
@@ -23,7 +22,18 @@
 // mock objects are set here.
 // * * * * * * * * * * * * * * * * * * * * * * * *
 
-// Placeholder for test setup
+// Define the test suite and add test cases
+FOSSIL_TEST_SUITE(basic_suite);
+
+// Setup function for the test suite
+FOSSIL_SETUP(basic_suite) {
+    // Setup code here
+}
+
+// Teardown function for the test suite
+FOSSIL_TEARDOWN(basic_suite) {
+    // Teardown code here
+}
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test Cases
@@ -33,25 +43,25 @@
 // as samples for library usage.
 // * * * * * * * * * * * * * * * * * * * * * * * *
 
-FOSSIL_TEST(test_fizzbuzz_1) {
+FOSSIL_TEST_CASE(test_fizzbuzz_1) {
     char output[10];
     fizzbuzz(1, output);
     ASSUME_ITS_EQUAL_CSTR("1", output);
 }
 
-FOSSIL_TEST(test_fizzbuzz_3) {
+FOSSIL_TEST_CASE(test_fizzbuzz_3) {
     char output[10];
     fizzbuzz(3, output);
     ASSUME_ITS_EQUAL_CSTR("Fizz", output);
 }
 
-FOSSIL_TEST(test_fizzbuzz_5) {
+FOSSIL_TEST_CASE(test_fizzbuzz_5) {
     char output[10];
     fizzbuzz(5, output);
     ASSUME_ITS_EQUAL_CSTR("Buzz", output);
 }
 
-FOSSIL_TEST(test_fizzbuzz_15) {
+FOSSIL_TEST_CASE(test_fizzbuzz_15) {
     char output[10];
     fizzbuzz(15, output);
     ASSUME_ITS_EQUAL_CSTR("FizzBuzz", output);
@@ -60,9 +70,11 @@ FOSSIL_TEST(test_fizzbuzz_15) {
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test Pool
 // * * * * * * * * * * * * * * * * * * * * * * * *
-FOSSIL_TEST_GROUP(c_some_tests) {    
-    ADD_TEST(test_fizzbuzz_1);
-    ADD_TEST(test_fizzbuzz_3);
-    ADD_TEST(test_fizzbuzz_5);
-    ADD_TEST(test_fizzbuzz_15);
+FOSSIL_TEST_GROUP(c_some_basic_tests) {    
+    FOSSIL_TEST_ADD(basic_suite, test_fizzbuzz_1);
+    FOSSIL_TEST_ADD(basic_suite, test_fizzbuzz_3);
+    FOSSIL_TEST_ADD(basic_suite, test_fizzbuzz_5);
+    FOSSIL_TEST_ADD(basic_suite, test_fizzbuzz_15);
+
+    FOSSIL_TEST_REGISTER(basic_suite);
 } // end of tests
