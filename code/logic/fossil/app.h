@@ -14,6 +14,9 @@
 #ifndef FOSSIL_APP_H
 #define FOSSIL_APP_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "common.h"
 
@@ -31,5 +34,9 @@ void fizzbuzz(int n, char *output);
  * @param filename The name of the file to process.
  */
 void process_file(const char *filename);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // FOSSIL_APP_H
