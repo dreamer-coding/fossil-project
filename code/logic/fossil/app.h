@@ -14,11 +14,11 @@
 #ifndef FOSSIL_APP_H
 #define FOSSIL_APP_H
 
+#include "common.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "common.h"
 
 /**
  * Generate a FizzBuzz output for a given integer.
