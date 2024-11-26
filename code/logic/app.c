@@ -13,12 +13,6 @@
  */
 #include "fossil/app.h"
 
-/**
- * Generate a FizzBuzz output for a given integer.
- *
- * @param n      The integer to process.
- * @param output The output buffer to write the result to.
- */
 void fizzbuzz(int n, char *output) {
     if (n % 3 == 0 && n % 5 == 0) {
         sprintf(output, "FizzBuzz");
@@ -31,11 +25,6 @@ void fizzbuzz(int n, char *output) {
     }
 } // end of fun
 
-/**
- * Process a file containing integers and print the FizzBuzz output for each one.
- *
- * @param filename The name of the file to process.
- */
 void process_file(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
